@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Nathasha Yasmin dos S. Sousa</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    :root {
+      --bg: #06132d;
+      --card: #10264c;
+      --text: #ffffff;
+      --muted: #b9c9e8;
+      --blue: #63b4ff;
+    }
+
+    body.light {
+      --bg: #eaf4ff;
+      --card: #ffffff;
+      --text: #10264a;
+      --muted: #526988;
+      --blue: #1769aa;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          #1b4d8a55,
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 85% 75%,
+          #4da3ff22,
+          transparent 25%
+        ),
+        var(--bg);
+
+      color: var(--text);
+      transition: 0.4s;
+      overflow-x: hidden;
+    }
+
+    /* ESTRELAS */
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      position: absolute;
+      color: white;
+      animation: twinkle 2.4s infinite ease-in-out;
+    }
+
+    .star:nth-child(1) {
+      left: 8%;
+      top: 12%;
+    }
+
+    .star:nth-child(2) {
+      left: 86%;
+      top: 15%;
+      animation-delay: 0.5s;
+    }
+
+    .star:nth-child(3) {
+      left: 18%;
+      top: 47%;
+      animation-delay: 1s;
+    }
+
+    .star:nth-child(4) {
+      left: 90%;
+      top: 58%;
+      animation-delay: 0.8s;
+    }
+
+    .star:nth-child(5) {
+      left: 7%;
+      top: 82%;
+      animation-delay: 1.2s;
+    }
+
+    .star:nth-child(6) {
+      left: 73%;
+      top: 84%;
+      animation-delay: 0.3s;
+    }
+
+    .star:nth-child(7) {
+      left: 48%;
+      top: 10%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes twinkle {
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.4);
+      }
+    }
+
+    /* BOTÃO DE TEMA */
+
+    .theme {
+      position: fixed;
+      right: 18px;
+      top: 18px;
+
+      border: 0;
+      border-radius: 50%;
+
+      width: 48px;
+      height: 48px;
+
+      background: #ffffff18;
+      color: var(--text);
+
+      font-size: 21px;
+      cursor: pointer;
+
+      backdrop-filter: blur(8px);
+
+      z-index: 5;
+
+      transition: 0.3s;
+    }
+
+    .theme:hover {
+      transform: scale(1.1);
+      background: #ffffff30;
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+
+    main {
+      position: relative;
+      z-index: 1;
+
+      max-width: 900px;
+      margin: auto;
+
+      padding: 70px 20px 35px;
+
+      text-align: center;
+    }
+
+    .school {
+      color: var(--blue);
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 45px;
+      line-height: 1.5;
+    }
+
+    h2 {
+      margin-bottom: 22px;
+    }
+
+    /* CARDS */
+
+    .grid {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 22px;
+
+      max-width: 720px;
+
+      margin: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.07);
+
+      border: 1px solid #79bfff44;
+
+      border-radius: 22px;
+
+      padding: 28px 20px;
+
+      min-height: 160px;
+
+      cursor: pointer;
+
+      box-shadow: 0 12px 30px #0004;
+
+      backdrop-filter: blur(10px);
+
+      transition: 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px) scale(1.02);
+
+      border-color: var(--blue);
+    }
+
+    .icon {
+      font-size: 38px;
+
+      margin-bottom: 10px;
+
+      transition: 0.25s;
+    }
+
+    .card:hover .icon {
+      transform: scale(1.15);
+    }
+
+    .card h3 {
+      font-size: 21px;
+
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      color: var(--muted);
+
+      line-height: 1.55;
+
+      font-size: 14px;
+
+      max-height: 0;
+
+      opacity: 0;
+
+      overflow: hidden;
+
+      transition: 0.35s;
+    }
+
+    .card.active .desc {
+      max-height: 150px;
+
+      opacity: 1;
+
+      margin-top: 8px;
+    }
+
+    .card.active {
+      border-color: var(--blue);
+
+      transform: scale(1.02);
+    }
+
+    /* RODAPÉ */
+
+    footer {
+      margin-top: 45px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: 145px;
+      }
+
+      main {
+        padding-top: 80px;
+      }
+
+      h1 {
+        line-height: 1.1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ESTRELAS -->
+
+  <div class="stars">
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+    <span class="star">✧</span>
+    <span class="star">✦</span>
+  </div>
+
+
+  <!-- BOTÃO DE TEMA -->
+
+  <button
+    class="theme"
+    onclick="theme()"
+    aria-label="Alternar tema"
+  >
+    🌙
+  </button>
+
+
+  <!-- CONTEÚDO -->
+
+  <main>
+
+    <div class="school">
+      CCM MONTEIRO LOBATO
+    </div>
+
+    <h1>
+      Nathasha Yasmin dos S. Sousa
+    </h1>
+
+    <p class="subtitle">
+      Pequenos passos hoje, grandes conquistas amanhã. ✨
+    </p>
+
+
+    <h2>
+      🎯 Meus objetivos
+    </h2>
+
+
+    <section class="grid">
+
+      <!-- ESTUDOS -->
+
+      <div
+        class="card"
+        onclick="openCard(this)"
+      >
+        <div class="icon">
+          📚
+        </div>
+
+        <h3>
+          Estudos
+        </h3>
+
+        <div class="desc">
+          Dedicar-me aos estudos, aprender cada vez mais
+          e construir uma boa base para alcançar meus sonhos.
+        </div>
+      </div>
+
+
+      <!-- DINHEIRO -->
+
+      <div
+        class="card"
+        onclick="openCard(this)"
+      >
+        <div class="icon">
+          💰
+        </div>
+
+        <h3>
+          Dinheiro
+        </h3>
+
+        <div class="desc">
+          Aprender a cuidar do meu dinheiro, economizar,
+          organizar minha vida financeira e conquistar
+          minha independência.
+        </div>
+      </div>
+
+
+      <!-- FUTURO -->
+
+      <div
+        class="card"
+        onclick="openCard(this)"
+      >
+        <div class="icon">
+          🚀
+        </div>
+
+        <h3>
+          Futuro
+        </h3>
+
+        <div class="desc">
+          Construir um futuro do qual eu possa me orgulhar,
+          alcançar meus objetivos e realizar meus sonhos.
+        </div>
+      </div>
+
+
+      <!-- LINKEDIN -->
+
+      <div
+        class="card"
+        onclick="openLinkedIn()"
+      >
+        <div class="icon">
+          💙
+        </div>
+
+        <h3>
+          Perfil
+        </h3>
+
+        <div class="desc">
+          Clique para conhecer meu perfil profissional
+          no LinkedIn.
+        </div>
+      </div>
+
+    </section>
+
+
+    <footer>
+      Feito com 💙, sonhos e determinação.
+    </footer>
+
+  </main>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    /* ABRIR E FECHAR OS CARDS */
+
+    function openCard(card) {
+
+      document
+        .querySelectorAll(".card")
+        .forEach(function(item) {
+
+          if (item !== card) {
+            item.classList.remove("active");
+          }
+
+        });
+
+      card.classList.toggle("active");
+    }
+
+
+    /* MODO CLARO / ESCURO */
+
+    function theme() {
+
+      document.body.classList.toggle("light");
+
+      const button =
+        document.querySelector(".theme");
+
+      if (
+        document.body.classList.contains("light")
+      ) {
+
+        button.textContent = "☀️";
+
+      } else {
+
+        button.textContent = "🌙";
+
+      }
+    }
+
+
+    /* LINKEDIN */
+
+    function openLinkedIn() {
+
+      window.open(
+        "https://www.linkedin.com/in/yasmin-santos-2840a2429?trk=contact-info",
+        "_blank"
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
